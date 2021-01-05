@@ -12,8 +12,6 @@ public class ClienteDTO implements Serializable {
 	private String email;
 	private String cpf;
 	private String nascimento;
-	private Integer conta;
-	private Integer digito;
 	private Integer banco;
 	
 	
@@ -23,15 +21,12 @@ public class ClienteDTO implements Serializable {
 	}
 
 
-	public ClienteDTO(Integer id, String nome, String email, String cpf, String nascimento, Integer conta, Integer digito,
-			Integer banco) {
+	public ClienteDTO(Integer id, String nome, String email, String cpf, String nascimento, Integer banco) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
 		this.nascimento = nascimento;
-		this.conta = conta;
-		this.digito = digito;
 		this.banco = banco;
 	}
 
@@ -83,26 +78,6 @@ public class ClienteDTO implements Serializable {
 
 	public void setNascimento(String nascimento) {
 		this.nascimento = nascimento;
-	}
-
-
-	public Integer getConta() {
-		return conta;
-	}
-
-
-	public void setConta(Integer conta) {
-		this.conta = conta;
-	}
-
-
-	public Integer getDigito() {
-		return digito;
-	}
-
-
-	public void setDigito(Integer digito) {
-		this.digito = digito;
 	}
 
 

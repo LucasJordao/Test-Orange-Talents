@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,19 +47,25 @@ public class ClienteService {
 	
 	public Cliente fromDTO(ClienteDTO objDTO) throws ParseException {
 		Date nascimento = sdf.parse(objDTO.getNascimento());
+		Random digito = new Random();
 		Cliente obj = new Cliente();
 		Banco banco = bancoService.findById(objDTO.getBanco());
 		obj.setId(null);
 		obj.setNome(obj.getNome());
 		obj.setCpf(objDTO.getCpf());
 		obj.setEmail(objDTO.getEmail());
-		obj.setConta(objDTO.getConta());
-		obj.setDigito(obj.getDigito());
+		obj.setConta(generatedSequence());
+		obj.setDigito(digito.nextInt(9 - 1) + 1);
 		obj.setNascimento(nascimento);
 		obj.setBanco(banco);
 		
 		banco.getClientes().addAll(Arrays.asList(obj));
 		
 		return obj;
+	}
+	
+	public Integer generatedSequence() {
+		Random code = new Random();
+		return code.nextInt(10000000 - 1);
 	}
 }
