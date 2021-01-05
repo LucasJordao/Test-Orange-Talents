@@ -1,7 +1,6 @@
 package com.lucas.testorangetalents.domains;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,19 +30,16 @@ public class Cliente implements Serializable{
 	private Integer digito;
 	
 	// Relacionamentos
-	@ManyToMany
-	@JoinTable(
-		name = "CLIENTE_BANCO",
-		joinColumns = @JoinColumn(name = "cliente_id"),
-		inverseJoinColumns = @JoinColumn(name = "banco_id"))
-	private List<Banco> bancos = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "banco_id")
+	private Banco banco;
 	
 	// Construtores
 	public Cliente() {
 		
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpf, Date nascimento, Integer conta, Integer digito) {
+	public Cliente(Integer id, String nome, String email, String cpf, Date nascimento, Integer conta, Integer digito, Banco banco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,6 +48,7 @@ public class Cliente implements Serializable{
 		this.nascimento = nascimento;
 		this.conta = conta;
 		this.digito = digito;
+		this.banco = banco;
 	}
 
 	// Getters e Setters
@@ -111,13 +107,13 @@ public class Cliente implements Serializable{
 	public void setDigito(Integer digito) {
 		this.digito = digito;
 	}
-	
-	public List<Banco> getBancos() {
-		return bancos;
+
+	public Banco getBanco() {
+		return banco;
 	}
 
-	public void setBancos(List<Banco> bancos) {
-		this.bancos = bancos;
+	public void setBanco(Banco banco) {
+		this.banco = banco;
 	}
 
 	// HashCode e Equals

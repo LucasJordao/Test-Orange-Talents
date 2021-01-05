@@ -13,13 +13,13 @@ public class BancoService {
 
 	// Repositorys
 	@Autowired
-	private BancoRepository service;
+	private BancoRepository repository;
 	
 	
 	/*
-	 * Método responsável por retornar uma lista de bancos cadastradas no banco de dados
+	 * Método responsável por retornar uma lista de bancos cadastrados no banco de dados
 	 */
 	public List<Banco> findAll(){
-		return service.findAll();
+		return repository.findAll();
 	}
 }
