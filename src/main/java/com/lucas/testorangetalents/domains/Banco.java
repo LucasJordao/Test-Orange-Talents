@@ -1,11 +1,14 @@
 package com.lucas.testorangetalents.domains;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,13 +23,16 @@ public class Banco implements Serializable{
 	private Integer id;
 	private String nome;
 	
+	// Relacionamentos
+	@ManyToMany(mappedBy = "bancos")
+	private List<Cliente> clientes = new ArrayList<>();
+	
 	// Construtores
 	public Banco() {
 		
 	}
 
 	public Banco(Integer id, String nome) {
-		super();
 		this.id = id;
 		this.nome = nome;
 	}
@@ -46,6 +52,14 @@ public class Banco implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	// HashCode e equals
