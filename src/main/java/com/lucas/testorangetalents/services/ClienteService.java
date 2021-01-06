@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.lucas.testorangetalents.domains.Banco;
 import com.lucas.testorangetalents.domains.Cliente;
 import com.lucas.testorangetalents.dto.ClienteDTO;
 import com.lucas.testorangetalents.repositories.ClienteRepository;
+import com.lucas.testorangetalents.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -43,6 +45,14 @@ public class ClienteService {
 		obj.setId(null);
 		bancoService.update(obj.getBanco());
 		return repository.save(obj);
+	}
+	
+	
+	public Cliente findById(Integer id) {
+		Optional<Cliente> obj = repository.findById(id);
+		
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto de id: " + id + " não encontrado. Tipo: " + 
+										Cliente.class.getName()));
 	}
 	
 	
