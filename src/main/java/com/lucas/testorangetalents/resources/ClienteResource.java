@@ -4,6 +4,8 @@ import java.net.URI;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,7 @@ public class ClienteResource {
 	}
 	
 	@PostMapping(value = "/")
-	public ResponseEntity<Void> insert(@RequestBody ClienteDTO objDTO) throws ParseException{
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDTO) throws ParseException{
 		Cliente obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();

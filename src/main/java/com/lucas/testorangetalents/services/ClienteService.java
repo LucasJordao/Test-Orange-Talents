@@ -45,6 +45,12 @@ public class ClienteService {
 		return repository.save(obj);
 	}
 	
+	
+	// Métodos auxiliares
+	
+	/*
+	 * Método responsável por converter um objeto clienteDto em um cliente defualt 
+	 */
 	public Cliente fromDTO(ClienteDTO objDTO) throws ParseException {
 		Date nascimento = sdf.parse(objDTO.getNascimento());
 		Random digito = new Random();
@@ -64,6 +70,10 @@ public class ClienteService {
 		return obj;
 	}
 	
+	
+	/*
+	 * Método responsável por gerar um número sequencial para a conta do cliente 
+	 */
 	public Integer generatedSequence() {
 		Random code = new Random();
 		return code.nextInt(10000000 - 1);

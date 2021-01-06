@@ -2,15 +2,30 @@ package com.lucas.testorangetalents.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import com.lucas.testorangetalents.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	// Atributos
 	private Integer id;
+	@NotEmpty(message = "O campo nome não pode ser vazio")
+	@Size(min = 6, max = 80, message = "O tamanho deve ser entre 6 e 80")
 	private String nome;
+	@NotEmpty(message = "O campo email não pode ser vazio")
+	@Email(message = "Email inválido")
 	private String email;
+	@NotEmpty(message = "O campo cpf não pode ser vazio")
 	private String cpf;
+	@NotEmpty(message = "O campo data de nascimento não pode ser vazio")
+	@Past(message = "A data não pode ser maior do que a atual")
 	private String nascimento;
 	private Integer banco;
 	
