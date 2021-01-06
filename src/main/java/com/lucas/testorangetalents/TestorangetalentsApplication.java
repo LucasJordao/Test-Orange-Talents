@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.lucas.testorangetalents.domains.Banco;
 import com.lucas.testorangetalents.domains.Cliente;
 import com.lucas.testorangetalents.repositories.BancoRepository;
 import com.lucas.testorangetalents.repositories.ClienteRepository;
 
+@Configuration
 @SpringBootApplication
 public class TestorangetalentsApplication implements CommandLineRunner{
 
@@ -45,6 +51,13 @@ public class TestorangetalentsApplication implements CommandLineRunner{
 		
 		bancoRepository.saveAll(Arrays.asList(b1, b2));
 		clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
+	}
+	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		return source;
 	}
 
 }
