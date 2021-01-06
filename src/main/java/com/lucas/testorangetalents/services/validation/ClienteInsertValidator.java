@@ -6,11 +6,19 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.lucas.testorangetalents.domains.Cliente;
 import com.lucas.testorangetalents.dto.ClienteDTO;
+import com.lucas.testorangetalents.repositories.ClienteRepository;
 import com.lucas.testorangetalents.resources.exception.FieldMessage;
 import com.lucas.testorangetalents.services.validation.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteDTO>{
+	
+	@Autowired
+	private ClienteRepository repo;
+	
 	@Override
 	public void initialize(ClienteInsert ann) {
 		
@@ -29,7 +37,16 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 			list.add(new FieldMessage("nascimento", "Data de Nascimento inválida"));
 		}
     	
+		Cliente cliente = repo.findByEmail(objDTO.getEmail());
+		Cliente clienteCpf = repo.findByCpf(objDTO.getCpf());
 		
+		if(cliente != null) {
+			list.add(new FieldMessage("email", "Email já existente"));
+		}
+		
+		if(clienteCpf != null) {
+			list.add(new FieldMessage("cpf", "CPF já existente"));
+		}
 		for(FieldMessage e: list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMensagem()).addPropertyNode(e.getCampo())
