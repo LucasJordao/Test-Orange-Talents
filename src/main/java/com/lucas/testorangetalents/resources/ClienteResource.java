@@ -28,7 +28,7 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService service;
 	
-	@GetMapping(value = "/")
+	@GetMapping
 	public ResponseEntity<?> findAll(){
 		List<Cliente> clientes = service.findAll();
 		return ResponseEntity.ok().body(clientes);
@@ -41,7 +41,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(cliente);
 	}
 	
-	@PostMapping(value = "/")
+	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDTO) throws ParseException{
 		Cliente obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);

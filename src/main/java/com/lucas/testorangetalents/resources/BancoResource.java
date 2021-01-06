@@ -19,7 +19,7 @@ public class BancoResource {
 	@Autowired
 	private BancoService service;
 	
-	@GetMapping(value = "/")
+	@GetMapping
 	public ResponseEntity<?> findAll(){
 		List<Banco> bancos = service.findAll();
 		
