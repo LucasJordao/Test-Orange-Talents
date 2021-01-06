@@ -67,7 +67,7 @@ public class ClienteService {
 		Cliente obj = new Cliente();
 		Banco banco = bancoService.findById(objDTO.getBanco());
 		obj.setId(null);
-		obj.setNome(obj.getNome());
+		obj.setNome(objDTO.getNome());
 		obj.setCpf(objDTO.getCpf());
 		obj.setEmail(objDTO.getEmail());
 		obj.setConta(generatedSequence());

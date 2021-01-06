@@ -10,13 +10,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @SpringBootApplication
-public class TestorangetalentsApplication{
+public class TestorangetalentsApplication {
 
-	
 	public static void main(String[] args) {
 		SpringApplication.run(TestorangetalentsApplication.class, args);
 	}
+	
 
+	
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
