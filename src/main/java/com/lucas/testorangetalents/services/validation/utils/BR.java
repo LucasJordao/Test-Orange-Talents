@@ -61,11 +61,13 @@ public class BR {
     	
     	try {
     		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    		
-    		dateValue = sdf.parse(date);
+   
     		Date atual = new Date();
     		
     		if(date != null) {
+
+        		dateValue = sdf.parse(date);
+        		
     			if(!date.equals(sdf.format(dateValue)) || atual.before(dateValue)) {
         			date = null;
         		}
