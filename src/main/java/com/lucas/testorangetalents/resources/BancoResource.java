@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lucas.testorangetalents.domains.Banco;
 import com.lucas.testorangetalents.services.BancoService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/bancos")
 public class BancoResource {
@@ -19,6 +21,7 @@ public class BancoResource {
 	@Autowired
 	private BancoService service;
 	
+	@ApiOperation(value="Busca todos Bancos")
 	@GetMapping
 	public ResponseEntity<?> findAll(){
 		List<Banco> bancos = service.findAll();

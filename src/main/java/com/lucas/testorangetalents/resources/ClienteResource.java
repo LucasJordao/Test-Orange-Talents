@@ -20,6 +20,10 @@ import com.lucas.testorangetalents.domains.Cliente;
 import com.lucas.testorangetalents.dto.ClienteDTO;
 import com.lucas.testorangetalents.services.ClienteService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
@@ -28,12 +32,17 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService service;
 	
+	@ApiOperation(value="Busca todos clientes")
 	@GetMapping
 	public ResponseEntity<?> findAll(){
 		List<Cliente> clientes = service.findAll();
 		return ResponseEntity.ok().body(clientes);
 	}
 	
+	@ApiOperation(value="Buscar Cliente por id")
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Não foi encontrado nenhum cliente com o id informado")
+	})
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> findById(@PathVariable Integer id){
 		Cliente cliente = service.findById(id);
@@ -41,6 +50,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(cliente);
 	}
 	
+	@ApiOperation(value="Inserir cliente")
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDTO) throws ParseException{
 		Cliente obj = service.fromDTO(objDTO);
