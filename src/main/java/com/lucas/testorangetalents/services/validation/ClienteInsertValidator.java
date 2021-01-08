@@ -30,11 +30,11 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		List<FieldMessage> list = new ArrayList<>();
 		
 		if(!BR.isValidCpf(objDTO.getCpf())) {
-			list.add(new FieldMessage("Cpf", "CPF Inválido"));
+			list.add(new FieldMessage("Cpf", "CPF Inválido (não utilize caracteres especiais)"));
 		}
 		
 		if(!BR.isValidDate(objDTO.getNascimento())) {
-			list.add(new FieldMessage("nascimento", "Data de Nascimento inválida"));
+			list.add(new FieldMessage("nascimento", "Data de Nascimento inválida (não adicione uma data maior que a atual)"));
 		}
     	
 		Cliente cliente = repo.findByEmail(objDTO.getEmail());
